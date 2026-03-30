@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Story Generator</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+
+  <h1>AI Story Generator 🚀</h1>
+
+  <textarea id="prompt" rows="5" cols="50" placeholder="اكتب فكرة القصة هنا..."></textarea>
+  <br><br>
+
+  <button onclick="generate()">Generate</button>
+
+  <h3>Result:</h3>
+  <pre id="result"></pre>
+
+  <script>
+    async function generate() {
+      const prompt = document.getElementById("prompt").value;
+
+      const res = await fetch("http://localhost:5000/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+      document.getElementById("result").innerText = data.result;
+    }
+  </script>
+
+</body>
+</html>
